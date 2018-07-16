@@ -1,10 +1,11 @@
 
+import { reducer } from '.';
 // CONSTANTS
 const INCREMENT = "INCREMENT";
 
 
 // ACTION BUILDERS
-function increment(amount) {
+export function increment(amount) {
   return {
     type: INCREMENT,
     payload: amount
@@ -12,10 +13,13 @@ function increment(amount) {
 }
 
 // REDUCER
-function(state, action) {
+export default function reducer(state, action) {
   switch(action.type) {
     case INCREMENT:
       let count = state.count + action.payload;
-      return Object.assign({}, state, {count: count})
+      return Object.assign({}, state, { count: count })
   }
+
+  // always return state so if there's a condition that isnt defined it returns the  default
+  return state;
 }
