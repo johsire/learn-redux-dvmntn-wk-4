@@ -2,23 +2,27 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { connect } from 'react-redux';
+import { increment } from './ducks/counter';
 
-export default class App extends Component {
+class App extends Component {
   render() {
+    // always destructure everything from props;
+    const { count, increment } = this.props;
     return (
+
       <div className="app">
         <section className="counter">
-          <h1 className="counter__current-value">{ 0 }</h1>
+          <h1 className="counter__current-value">{ count }</h1>
           <div className="counter__button-wrapper">
             <button
               className="counter__button increment-one"
-              onClick={ () => null }
+              onClick={ () => increment(1) }
             >
               +1
             </button>
             <button
               className="counter__button increment-five"
-              onClick={ () => null }
+              onClick={ () => increment(5) }
             >
               +5
             </button>
@@ -63,9 +67,9 @@ export default class App extends Component {
 
 function copyFromStoreToProps(stateFromTheStore) {
   return {
-    count: storeState.count
+    count: stateFromTheStore.count
   }
 }
 
-const connectedApp = connect(IN, OUT);
+const connectedApp = connect(copyFromStoreToProps, { increment });
 export default connectedApp(App);

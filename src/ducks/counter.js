@@ -1,5 +1,4 @@
 
-import { reducer } from '.';
 // CONSTANTS
 const INCREMENT = "INCREMENT";
 
@@ -12,8 +11,12 @@ export function increment(amount) {
   }
 }
 
+const initialState = {
+  count: 73
+}
+
 // REDUCER
-export default function reducer(state, action) {
+export default function reducer(state = initialState, action) {
   switch(action.type) {
     case INCREMENT:
       let count = state.count + action.payload;
