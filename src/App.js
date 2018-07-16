@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 
 import { connect } from 'react-redux';
-import { increment, decrement } from './ducks/counter';
+import { increment, decrement, undo, redo } from './ducks/counter';
 
 class App extends Component {
   render() {
     // always destructure everything from props;
-    const { count, increment, decrement } = this.props;
+    const { count, increment, decrement, undo, redo } = this.props;
     return (
 
       <div className="app">
@@ -42,14 +42,14 @@ class App extends Component {
             <button
               className="counter__button undo"
               disabled={ true }
-              onClick={ () => null }
+              onClick={ () => undo }
             >
               Undo
             </button>
             <button
               className="counter__button redo"
               disabled={ true }
-              onClick={ () => null }
+              onClick={ () => redo }
             >
               Redo
             </button>
@@ -71,5 +71,5 @@ function copyFromStoreToProps(stateFromTheStore) {
   }
 }
 
-const connectedApp = connect(copyFromStoreToProps, { increment, decrement });
+const connectedApp = connect(copyFromStoreToProps, { increment, decrement, undo, redo });
 export default connectedApp(App);

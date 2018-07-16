@@ -2,6 +2,8 @@
 // CONSTANTS
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
+const UNDO = "UNDO";
+const REDO = "REDO";
 
 
 // ACTION BUILDERS
@@ -19,8 +21,24 @@ export function decrement(amount) {
   }
 }
 
+export function undo(amount) {
+  return {
+    type: UNDO,
+    payload: amount
+  }
+}
+
+export function redo(amount) {
+  return {
+    type: REDO,
+    payload: amount
+  }
+}
+
 const initialState = {
-  count: 73
+  count: 73,
+  futureValues: [],
+  previousValues: []
 }
 
 // REDUCER
@@ -37,6 +55,17 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, { count: count })
     }
 
+    switch(action.type) {
+      case UNDO:
+      let previousValues = state.previousValues.slice( 1 );
+      return Object.assign({}, state, { previousValues: previousValues })
+    }
+
+    switch(action.type) {
+      case REDO: 
+      let futureValues = state.futureValues.slice( 1 );
+      return Object.assign({}, state, { futureValues: futureValues })
+    }
 
   // always return state so if there's a condition that isnt defined it returns the  default
   return state;
