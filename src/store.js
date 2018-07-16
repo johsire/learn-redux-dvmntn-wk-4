@@ -1,4 +1,4 @@
-import { crateStore, createStore } from 'redux';
+import { createStore } from 'redux';
 import counter from './ducks/counter';
 
 const store = createStore(counter);
