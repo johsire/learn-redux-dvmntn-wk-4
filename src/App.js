@@ -3,7 +3,7 @@ import "./App.css";
 
 import { connect } from 'react-redux';
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <div className="app">
@@ -61,4 +61,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function copyFromStoreToProps(stateFromTheStore) {
+  return {
+    count: storeState.count
+  }
+}
+
+const connectedApp = connect(IN, OUT);
+export default connectedApp(App);
