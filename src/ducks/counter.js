@@ -57,13 +57,11 @@ export default function reducer(state = initialState, action) {
 
     switch(action.type) {
       case UNDO:
-      return {
+      
         let count = state.previousValues [ 0 ]
         let futureValues = [ state.count, ...state.futureValues ]
-        let previousValues = state.previousValues.slice( 1 )
-      }
-      
-      // return Object.assign({}, state, { previousValues: previousValues })
+        let previousValues = state.previousValues.slice( 1 )      
+      return Object.assign({}, state, { previousValues: previousValues })
     }
 
     switch(action.type) {
