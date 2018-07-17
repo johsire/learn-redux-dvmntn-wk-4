@@ -7,7 +7,7 @@ import { increment, decrement, undo, redo } from './ducks/counter';
 class App extends Component {
   render() {
     // always destructure everything from props;
-    const { count, increment, decrement, undo, redo } = this.props;
+    const { count, increment, decrement, undo, redo, futureValues, previousValues } = this.props;
     return (
 
       <div className="app">
@@ -41,14 +41,14 @@ class App extends Component {
             <br />
             <button
               className="counter__button undo"
-              disabled={ true }
+              disabled={ previousValues.length === 0 }
               onClick={ () => undo }
             >
               Undo
             </button>
             <button
               className="counter__button redo"
-              disabled={ true }
+              disabled={ futureValues.length === 0 }
               onClick={ () => redo }
             >
               Redo

@@ -36,7 +36,7 @@ export function redo(amount) {
 }
 
 const initialState = {
-  count: 73,
+  count: 0,
   futureValues: [],
   previousValues: []
 }
@@ -57,13 +57,20 @@ export default function reducer(state = initialState, action) {
 
     switch(action.type) {
       case UNDO:
-      let previousValues = state.previousValues.slice( 1 );
-      return Object.assign({}, state, { previousValues: previousValues })
+      return {
+        count: state.previousValues [ 0 ]
+        futureValues: [ state.count, ...state.futureValues ]
+        previousValues: state.previousValues.slice( 1 )
+      }
+      
+      // return Object.assign({}, state, { previousValues: previousValues })
     }
 
     switch(action.type) {
       case REDO: 
+      let count = state.futureValues [ 0 ]
       let futureValues = state.futureValues.slice( 1 );
+      let previousValues = [ state.count, ...state.previousValues ]
       return Object.assign({}, state, { futureValues: futureValues })
     }
 
